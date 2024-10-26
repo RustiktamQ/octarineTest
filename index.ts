@@ -30,6 +30,7 @@ class BlackSquare {
     public Draw() {
         if (this.isDragging) {
             const mousePos = Input.CursorOnScreen;
+			console.log(mousePos.x, this.position.Width / 2);
             this.position.x = mousePos.x - this.position.Width / 2;
             this.position.y = mousePos.y - this.position.Height / 2;
         }
@@ -42,7 +43,6 @@ class BlackSquare {
             const mousePos = Input.CursorOnScreen;
             if (this.isMouseClickedInSquare(mousePos)) {
                 this.isDragging = true;
-                console.log("clicked in square");
             }
         }
     }
@@ -51,7 +51,6 @@ class BlackSquare {
         if (key === VMouseKeys.MK_LBUTTON) {
 			const mousePos = Input.CursorOnScreen;
             this.isDragging = false;
-            console.log(`stop mouse - ${mousePos.x}:${mousePos.y} | rect - ${this.position.x}:${this.position.y}`);
         }
     }
 
