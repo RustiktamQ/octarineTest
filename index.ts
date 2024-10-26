@@ -31,7 +31,7 @@ class BlackSquare {
         InputEventSDK.on("MouseKeyUp", this.onMouseKeyUp.bind(this));
     }
 
-    public Draw() {
+    public Draw(otherSquare?: BlackSquare) {
         if (this.isDragging) {
             const mousePos = Input.CursorOnScreen;
 			console.log(mousePos.x);
@@ -39,7 +39,22 @@ class BlackSquare {
             this.position.y = mousePos.y - this.offset.y;
         }
 
+        if (otherSquare && this.isOverlaped(otherSquare)) {
+            this.color = Color.Red;
+            otherSquare.color = Color.Red;
+        } else {
+            this.color = Color.Black;
+            if (otherSquare) otherSquare.color = Color.White;
+        }
+
         RendererSDK.FilledRect(this.position.pos1, this.position.Size, this.color);
+    }
+
+	private isOverlaped(otherSquare: BlackSquare): boolean {
+        return !(this.position.x > otherSquare.position.x + otherSquare.position.Width ||
+			this.position.x + this.position.Width < otherSquare.position.x ||
+			this.position.y > otherSquare.position.y + otherSquare.position.Height ||
+			this.position.y + this.position.Height < otherSquare.position.y);
     }
 
     private onMouseKeyDown(key: VMouseKeys) {
@@ -69,5 +84,5 @@ class BlackSquare {
 
 const clickableBlackSquare = new BlackSquare(300, 300, 200, 200, Color.Black);
 const clickableWhiteSquare = new BlackSquare(600, 300, 200, 200, Color.White);
-EventsSDK.on("Draw", () => clickableBlackSquare.Draw());
+EventsSDK.on("Draw", () => clickableBlackSquare.Draw(clickableWhiteSquare));
 EventsSDK.on("Draw", () => clickableWhiteSquare.Draw());
