@@ -31,8 +31,8 @@ class BlackSquare {
         if (this.isDragging) {
             const mousePos = Input.CursorOnScreen;
 			console.log(mousePos.x);
-            this.position.x = mousePos.x - this.position.Width;
-            this.position.y = mousePos.y - this.position.Height;
+            this.position.x = mousePos.x;
+            this.position.y = mousePos.y;
         }
 
         RendererSDK.FilledRect(this.position.pos1, this.position.Size, this.color);
