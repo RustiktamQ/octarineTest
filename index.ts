@@ -1,26 +1,20 @@
-import { EventsSDK, Rectangle, RendererSDK, Color, Menu } from "github.com/octarine-public/wrapper/index"
+import { EventsSDK, Color, Rectangle, RendererSDK } from "github.com/octarine-public/wrapper/index";
 
-console.log("Hello world!123")
+class BlackSquare {
+    private position: Rectangle;
 
-EventsSDK.on("GameStarted", () => {
-	console.log("GameStarted")
-})
+    constructor() {
+        this.position = new Rectangle();
+        this.position.x = 100;
+        this.position.y = 100;
+        this.position.Width = 200;
+        this.position.Height = 200;
+    }
 
-function test(): void {
-	const position = new Rectangle()
-	position.x = 100;
-	position.y = 100;
-	position.Width = 200;
-	position.Height = 200;
-	const division = position.Height / 10;
-
-	RendererSDK.FilledRect(position.pos1, position.Size, Color.Black.SetA(100))
-	RendererSDK.TextByFlags(
-		Menu.Localization.Localize("ItemPanel_Drag"),
-		position,
-		Color.White,
-		division
-	)
+    public Draw() {
+        RendererSDK.FilledRect(this.position.pos1, this.position.Size, Color.Black);
+    }
 }
 
-test()
+const blackSquare = new BlackSquare();
+EventsSDK.on("Draw", () => blackSquare.Draw());
