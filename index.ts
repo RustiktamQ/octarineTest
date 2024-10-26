@@ -12,7 +12,7 @@ import {
 class BlackSquare {
     private position: Rectangle;
 	private isDragging: boolean = false;
-	public color: Color;
+	private color: Color;
 	private bornColor: Color;
 	private offset: Vector2;
 
@@ -85,5 +85,8 @@ class BlackSquare {
 
 const clickableBlackSquare = new BlackSquare(300, 300, 200, 200, Color.Black);
 const clickableWhiteSquare = new BlackSquare(600, 300, 200, 200, Color.White);
-EventsSDK.on("Draw", () => clickableBlackSquare.Draw(clickableWhiteSquare));
-EventsSDK.on("Draw", () => clickableWhiteSquare.Draw());
+
+EventsSDK.on("Draw", () => {
+    clickableBlackSquare.Draw(clickableWhiteSquare);
+    clickableWhiteSquare.Draw(clickableBlackSquare);
+});
