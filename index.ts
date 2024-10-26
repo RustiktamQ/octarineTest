@@ -12,13 +12,16 @@ import {
 class BlackSquare {
     private position: Rectangle;
 	private isDragging: boolean = false;
+	private color: Color;
 
-    constructor() {
+    constructor(x: number, y: number, Width: number, Height: number, fillColor: Color) {
         this.position = new Rectangle();
-        this.position.x = 100;
-        this.position.y = 100;
-        this.position.Width = 200;
-        this.position.Height = 200;
+        this.position.x = x;
+        this.position.y = y;
+        this.position.Width = Width;
+        this.position.Height = Height;
+		this.color = fillColor;
+
 		
 		InputEventSDK.on("MouseKeyDown", this.onMouseKeyDown.bind(this));
         InputEventSDK.on("MouseKeyUp", this.onMouseKeyUp.bind(this));
@@ -31,7 +34,7 @@ class BlackSquare {
             this.position.y = mousePos.y - this.position.Height / 2;
         }
 
-        RendererSDK.FilledRect(this.position.pos1, this.position.Size, Color.Black);
+        RendererSDK.FilledRect(this.position.pos1, this.position.Size, this.color);
     }
 
     private onMouseKeyDown(key: VMouseKeys) {
@@ -58,5 +61,7 @@ class BlackSquare {
 
 }
 
-const clickableSquare = new BlackSquare();
-EventsSDK.on("Draw", () => clickableSquare.Draw());
+const clickableBlackSquare = new BlackSquare(300, 300, 200, 200, Color.Black);
+const clickableWhiteSquare = new BlackSquare(600, 300, 200, 200, Color.White);
+EventsSDK.on("Draw", () => clickableBlackSquare.Draw());
+EventsSDK.on("Draw", () => clickableWhiteSquare.Draw());
