@@ -45,6 +45,7 @@ class BlackSquare {
             otherSquare.color = Color.Red;
         } else {
             this.color = this.bornColor;
+			if (otherSquare) otherSquare.color = otherSquare.bornColor;
         }
 
         RendererSDK.FilledRect(this.position.pos1, this.position.Size, this.color);
