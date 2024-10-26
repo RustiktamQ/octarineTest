@@ -12,7 +12,7 @@ import {
 class BlackSquare {
     private position: Rectangle;
 	private isDragging: boolean = false;
-	private color: Color;
+	public color: Color;
 	private bornColor: Color;
 	private offset: Vector2;
 
