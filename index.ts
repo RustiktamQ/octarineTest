@@ -9,7 +9,7 @@ import {
 	RendererSDK 
 } from "github.com/octarine-public/wrapper/index";
 
-class BlackSquare {
+class Square {
     private position: Rectangle;
 	private isDragging: boolean = false;
 	private color: Color;
@@ -33,7 +33,7 @@ class BlackSquare {
         InputEventSDK.on("MouseKeyUp", this.onMouseKeyUp.bind(this));
     }
 
-    public Draw(otherSquare?: BlackSquare) {
+    public Draw(otherSquare?: Square) {
         if (this.isDragging) {
             const mousePos = Input.CursorOnScreen;
             this.position.x = mousePos.x - this.offset.x;
@@ -51,7 +51,7 @@ class BlackSquare {
         RendererSDK.FilledRect(this.position.pos1, this.position.Size, this.color);
     }
 
-	private isOverlaped(otherSquare: BlackSquare): boolean {
+	private isOverlaped(otherSquare: Square): boolean {
         return !(this.position.x > otherSquare.position.x + otherSquare.position.Width ||
 			this.position.x + this.position.Width < otherSquare.position.x ||
 			this.position.y > otherSquare.position.y + otherSquare.position.Height ||
@@ -83,8 +83,8 @@ class BlackSquare {
 
 }
 
-const clickableBlackSquare = new BlackSquare(300, 300, 200, 200, Color.Black);
-const clickableWhiteSquare = new BlackSquare(600, 300, 200, 200, Color.White);
+const clickableBlackSquare = new Square(300, 300, 200, 200, Color.Black);
+const clickableWhiteSquare = new Square(600, 300, 200, 200, Color.White);
 
 EventsSDK.on("Draw", () => {
     clickableBlackSquare.Draw(clickableWhiteSquare);
